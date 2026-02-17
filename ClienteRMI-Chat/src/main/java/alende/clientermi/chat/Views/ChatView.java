@@ -5,12 +5,15 @@
 package alende.clientermi.chat.Views;
 
 import java.awt.event.ActionListener;
+import java.util.List;
+import javax.swing.DefaultListModel;
 
 /**
  *
  * @author frana
  */
 public class ChatView extends javax.swing.JDialog {
+     private DefaultListModel<String> users = new DefaultListModel<>();
 
     /**
      * Creates new form ChatView
@@ -18,6 +21,7 @@ public class ChatView extends javax.swing.JDialog {
     public ChatView(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        UsuariosList.setModel(users);
     }
 
     /**
@@ -95,6 +99,16 @@ public String getMensaje(){
 }
  public void pressEnviarButton(ActionListener al){
     this.EnviarjButton.addActionListener(al);
+    }
+ public void mostrarUsuarios(List<String> usuarios) {
+        users.clear();
+        for (String u :usuarios) {
+            users.addElement(u);
+        }
+
+    }
+  public String getUser() {
+        return UsuariosList.getSelectedValue();
     }
    
 
