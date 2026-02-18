@@ -21,6 +21,7 @@ public class ChatView extends javax.swing.JDialog {
     public ChatView(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        noEdit();
         UsuariosList.setModel(users);
     }
 
@@ -97,19 +98,31 @@ public class ChatView extends javax.swing.JDialog {
 public String getMensaje(){
     return this.MensajeTextField.getText();
 }
+public void noEdit(){
+    this.MensajesTextArea.setEnabled(false);
+}
  public void pressEnviarButton(ActionListener al){
     this.EnviarjButton.addActionListener(al);
     }
  public void mostrarUsuarios(List<String> usuarios) {
+     String seleccionado=getUserSend();
+     
         users.clear();
         for (String u :usuarios) {
             users.addElement(u);
         }
-
+UsuariosList.setSelectedValue(seleccionado,true);
     }
-  public String getUser() {
+  public String getUserSend() {
         return UsuariosList.getSelectedValue();
     }
+  public void addMessage( String message){
+      MensajesTextArea.append(message+"\n");
+      
+  }
+  public void setMessage(String text){
+      this.MensajeTextField.setText(text);
+  }
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

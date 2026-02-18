@@ -4,26 +4,37 @@
  */
 package alende.psp.chatrmi.interfaz;
 
+import alende.clientermi.chat.Views.ChatView;
+import alende.clientermi.chat.controller.ChatController;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author frana
  */
-public class ChatAdmin extends UnicastRemoteObject implements Chat{
+public class ChatAdmin extends UnicastRemoteObject implements Chat {
+
+    private ChatView chat;
 
     public ChatAdmin() throws RemoteException {
+
     }
 
-   
-    
-    
+    public void setVista(ChatView chat) {
+        this.chat = chat;
+    }
 
     @Override
     public void receiveMessage(String from, String message) throws RemoteException {
-        System.out.println(from+":"+message);
+
+        javax.swing.SwingUtilities.invokeLater(() -> {
+            chat.addMessage(from + ":" + message);
+        });
+
     }
 
     @Override
@@ -45,5 +56,5 @@ public class ChatAdmin extends UnicastRemoteObject implements Chat{
     public void Unregister(String name) throws RemoteException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
 }

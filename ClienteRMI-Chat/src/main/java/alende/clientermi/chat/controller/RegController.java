@@ -55,6 +55,7 @@ public class RegController {
                     }
                     servidor.Register(nombre, chat);
                     ChatView ch = new ChatView(view, true);
+                    chat.setVista(ch);
                     ChatController cc = new ChatController(ch, chat,servidor,nombre);
                   
                     
